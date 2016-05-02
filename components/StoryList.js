@@ -1,6 +1,7 @@
 import React, {
     Component,
     ListView,
+    RecyclerViewBackedScrollView,
     StyleSheet,
     View
 } from 'react-native';
@@ -26,7 +27,8 @@ export default class StoryList extends Component {
             <ListView
                 dataSource={this.state.dataSource}
                 renderRow={this.renderItem}
-                style={styles.listView}/>
+                style={styles.listView}
+                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />} />
         );
     }
 

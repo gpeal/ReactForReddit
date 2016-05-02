@@ -1,7 +1,9 @@
 import { combineReducers, applyMiddleware } from 'redux';
 import devTools from 'remote-redux-devtools';
-import stories from './StoriesReducer';
+import stories from './stories';
+import routes from './routes';
 
 export default combineReducers({
-    stories
+    stories,
+    routes
 }, undefined, devTools())

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     votes: {
-        fontSize: 13,
+        fontSize: 14,
         color: "#AAAAAA",
         paddingRight: 4
     },

@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 import React, {
     AppRegistry,
     Component,
@@ -18,11 +13,12 @@ import {
 import {
     Provider
 } from 'react-redux';
+import App from './components/App';
 import combineReducers from './reducers/index';
-import App from './components/App'
 
 class ReactForReddit extends Component {
     render() {
+        console.log("Rendering index");
         return (
             <Provider store={createStore(combineReducers)} >
                 <App />

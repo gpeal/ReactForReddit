@@ -1,49 +1,38 @@
 import React, {
     Component,
+    Navigator,
+    StyleSheet,
     View
 } from 'react-native';
 import {
     connect
 } from 'react-redux';
-import MessageView from './MessageView';
-import StoryList from './StoryList';
+import {
+    Actions,
+    IndexRoute,
+    Router,
+    Scene
+} from 'react-native-router-flux';
+const RouterWithRedux = connect()(Router);
+import StoryListWithLoadingView from './StoryListWithLoadingView';
 
-const REQUEST_URL = 'https://www.reddit.com/.json';
-
-class App extends Component {
-
-    componentDidMount() {
-        this.fetchData();
-    }
-
-    fetchData() {
-        fetch(REQUEST_URL)
-            .then((response) => response.json())
-            .then((responseData) => this.props.addStories(responseData.data.children))
-            .done()
-    }
+export default class App extends Component {
 
     render() {
-        const stories = this.props.stories;
+        console.log("Rendering App")
+        return (
+            <Navigator
+                ref="naviagtor"
+                configureScene={(route) => {
+                    return Navigator.SceneConfigs.FloatFromBottomAndroid;
+                }}
+                initialRoute={{}}
+                renderScene={this.renderScene}
+             />
+        );
+    }
 
-        if (stories.length == 0) {
-            return <MessageView message="Loading Reddit..."/>;
-        }
-
-        return <StoryList stories={stories} />
+    renderScene(route, navigator) {
+        return <StoryListWithLoadingView />
     }
 }
-
-export default connect(
-    state => ({
-        stories: state.stories
-    }),
-    dispatch => ({
-        addStories: (stories) => {
-            dispatch({
-                type: 'ADD_STORIES',
-                stories
-            })
-        }
-    })
-)(App);
