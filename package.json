@@ -6,14 +6,17 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "^0.14.8",
-    "react-native": "^0.24.1",
-    "eslint": "2.9.0",
-    "eslint-plugin-react": "5.0.1"
+    "react-native": "0.24.1",
+    "react-redux": "4.4.5",
+    "redux": "3.5.2"
   },
   "devDependencies": {
-    "eslint": "^2.9.0",
-    "eslint-config-airbnb": "^8.0.0",
-    "eslint-plugin-react": "^5.0.1"
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^5.0.1",
+    "eslint-plugin-prefer-object-spread": "^1.0.0",
+    "eslint-plugin-react": "^3.16.1",
+    "babel-preset-airbnb": "^1.0.1",
+    "babel-preset-react-native": "^1.2.4",
+    "remote-redux-devtools": "0.3.0"
   }
 }
