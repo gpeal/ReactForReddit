@@ -6,11 +6,9 @@ import React, {
 } from 'react-native';
 import {
     connect
-} from 'react-redux'
-import MessageView from './MessageView';
+} from 'react-redux';
 import StoryItem from './StoryItem';
 
-const REQUEST_URL = 'https://www.reddit.com/.json';
 
 class StoryList extends Component {
 
@@ -21,25 +19,8 @@ class StoryList extends Component {
         })
     }
 
-    componentDidMount() {
-        this.fetchData();
-    }
-
-    fetchData() {
-        fetch(REQUEST_URL)
-            .then((response) => response.json())
-            .then((responseData) => this.props.addStories(responseData.data.children))
-            .done()
-    }
-
     render() {
-        const stories = this.props.stories;
-
-        if (stories.length == 0) {
-            return <MessageView message="Loading Reddit..." />;
-        }
-
-        this.dataSource = this.dataSource.cloneWithRows(stories);
+        this.dataSource = this.dataSource.cloneWithRows(this.props.stories);
 
         return (
             <ListView
@@ -52,7 +33,7 @@ class StoryList extends Component {
     renderItem(item) {
         const story = item.data;
         return (
-            <StoryItem story={story} />
+            <StoryItem story={story}/>
         );
     }
 }
@@ -63,14 +44,6 @@ StoryList.contextTypes = {
 export default connect(
     state => ({
         stories: state.stories
-    }),
-    dispatch => ({
-        addStories: (stories) => {
-            dispatch({
-                type: 'ADD_STORIES',
-                stories
-            })
-        }
     })
 )(StoryList);
 

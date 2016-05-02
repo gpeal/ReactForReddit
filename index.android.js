@@ -19,14 +19,13 @@ import {
     Provider
 } from 'react-redux';
 import combineReducers from './reducers/index';
-import StoryList from './components/StoryList'
+import App from './components/App'
 
 class ReactForReddit extends Component {
-
     render() {
         return (
             <Provider store={createStore(combineReducers)} >
-                <StoryList />
+                <App />
             </Provider>
         )
     }
