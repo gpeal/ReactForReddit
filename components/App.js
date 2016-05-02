@@ -30,12 +30,9 @@ class App extends Component {
             return <MessageView message="Loading Reddit..."/>;
         }
 
-        return <StoryList />
+        return <StoryList stories={stories} />
     }
 }
-App.contextTypes = {
-    store: React.PropTypes.object
-};
 
 export default connect(
     state => ({

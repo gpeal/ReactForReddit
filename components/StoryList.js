@@ -10,21 +10,21 @@ import {
 import StoryItem from './StoryItem';
 
 
-class StoryList extends Component {
+export default class StoryList extends Component {
 
     constructor(props) {
         super(props);
-        this.dataSource = new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1.data.id !== row2.data.id
-        })
+        this.state = {
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1.data.id !== row2.data.id,
+            }).cloneWithRows(props.stories)
+        };
     }
 
     render() {
-        this.dataSource = this.dataSource.cloneWithRows(this.props.stories);
-
         return (
             <ListView
-                dataSource={this.dataSource}
+                dataSource={this.state.dataSource}
                 renderRow={this.renderItem}
                 style={styles.listView}/>
         );
@@ -37,15 +37,6 @@ class StoryList extends Component {
         );
     }
 }
-StoryList.contextTypes = {
-    store: React.PropTypes.object
-};
-
-export default connect(
-    state => ({
-        stories: state.stories
-    })
-)(StoryList);
 
 const styles = StyleSheet.create({
     listView: {
