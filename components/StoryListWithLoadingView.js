@@ -25,14 +25,14 @@ class StoryListWithLoadingView extends Component {
 
 
     render() {
-        const { stories } = this.props;
+        const { stories, navigator } = this.props;
         console.log("Rendering StoryListWithLoadingView with " + stories.length + " stories");
 
         if (stories.length == 0) {
             return <MessageView message="Loading..." />;
         }
 
-        return <StoryList stories={stories}/>;
+        return <StoryList stories={stories} navigator={navigator} />;
     }
 }
 

@@ -4,40 +4,49 @@ import React, {
     Text,
     StyleSheet,
     ScrollView,
+    TouchableHighlight,
 } from 'react-native';
 import PreviewImage from './PreviewImage';
 
 export default class StoryItem extends Component {
 
     render() {
-        let story = this.props.story;
+        const { navigator, story}  = this.props;
         return (
-            <View key={story.name} style={styles.storyContainer}>
-                <View style={styles.contentContainer}>
-                    <View style={styles.topContainer}>
-                        <Text style={styles.votes}>{story.score}</Text>
-                        <Text style={styles.authorAndSubreddit}>{story.author}</Text>
-                        <Text style={styles.in}> in </Text>
-                        <Text style={styles.authorAndSubreddit}>{story.subreddit}</Text>
+            <TouchableHighlight key={story.name} style={styles.highlight} underlayColor='white' onPress = {() => this.onClick(navigator, story)}>
+                <View style={styles.storyContainer}>
+                    <View style={styles.contentContainer}>
+                        <View style={styles.topContainer}>
+                            <Text style={styles.votes}>{story.score}</Text>
+                            <Text style={styles.authorAndSubreddit}>{story.author}</Text>
+                            <Text style={styles.in}> in </Text>
+                            <Text style={styles.authorAndSubreddit}>{story.subreddit}</Text>
+                        </View>
+                        <Text style={styles.title} numberOfLines={2}>{story.title}</Text>
+                        <View style={styles.bottomContainer}>
+                            <Text style={styles.bottomText}>
+                                {story.num_comments} Comments
+                                {' • '}
+                                {story.domain}
+                            </Text>
+                        </View>
                     </View>
-                    <Text style={styles.title}>{story.title}</Text>
-                    <View style={styles.bottomContainer}>
-                        <Text style={styles.bottomText}>
-                            {story.num_comments} Comments
-                            {' • '}
-                            {story.domain}
-                        </Text>
-                    </View>
+                    <PreviewImage preview={story.preview}/>
                 </View>
-                <PreviewImage preview={story.preview}/>
-            </View>
+            </TouchableHighlight>
         )
+    }
+
+    onClick(navigator, story) {
+        navigator.push({ message: story.title });
     }
 }
 
 const styles = StyleSheet.create({
-    storyContainer: {
+    highlight: {
         flex: 1,
+    },
+    storyContainer: {
         flexDirection: 'row',
         backgroundColor: 'white',
         marginLeft: 8,
@@ -59,7 +68,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     contentContainer: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'space-between',
     },
     title: {
         fontSize: 14,
@@ -67,8 +77,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         color: '#444444',
         alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        flex: 1
+        justifyContent: 'flex-start'
     },
     author: {
         textAlign: 'center'

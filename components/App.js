@@ -1,4 +1,5 @@
 import React, {
+    BackAndroid,
     Component,
     Navigator,
     StyleSheet,
@@ -14,17 +15,26 @@ import {
     Scene
 } from 'react-native-router-flux';
 const RouterWithRedux = connect()(Router);
+import MessageView from './MessageView';
 import StoryListWithLoadingView from './StoryListWithLoadingView';
 
 export default class App extends Component {
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+    }
 
     render() {
         console.log("Rendering App")
         return (
             <Navigator
-                ref="naviagtor"
+                ref="navigator"
                 configureScene={(route) => {
-                    return Navigator.SceneConfigs.FloatFromBottomAndroid;
+                    return Navigator.SceneConfigs.PushFromRight;
                 }}
                 initialRoute={{}}
                 renderScene={this.renderScene}
@@ -33,6 +43,23 @@ export default class App extends Component {
     }
 
     renderScene(route, navigator) {
-        return <StoryListWithLoadingView />
+        if (route.message) {
+            return <MessageView message={route.message} />
+        }
+
+        return <StoryListWithLoadingView navigator={navigator} />
+    }
+
+    handleBackButton() {
+        console.log('this ' + this);
+        console.log('this.refs ' + this.refs);
+        console.log('this.refs.navigator ' + this.refs.navigator);
+        const navigator = this.refs.navigator;
+        if (navigator && navigator.getCurrentRoutes().length > 1) {
+            navigator.pop();
+            return true;
+        }
+
+        return false;
     }
 }

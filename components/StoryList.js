@@ -23,19 +23,20 @@ export default class StoryList extends Component {
     }
 
     render() {
+        const { navigator } = this.props;
         return (
             <ListView
                 dataSource={this.state.dataSource}
-                renderRow={this.renderItem}
+                renderRow={(item) => this.renderItem(navigator, item)}
                 style={styles.listView}
                 renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />} />
         );
     }
 
-    renderItem(item) {
+    renderItem(navigator, item) {
         const story = item.data;
         return (
-            <StoryItem story={story}/>
+            <StoryItem story={story} navigator={navigator}/>
         );
     }
 }

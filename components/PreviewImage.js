@@ -19,7 +19,8 @@ export default class PreviewImage extends Component {
 
 const styles = StyleSheet.create({
     thumbnail: {
-        width: 53,
-        height: 81
+        width: 64,
+        height: 64,
+        alignSelf: 'center'
     }
 });

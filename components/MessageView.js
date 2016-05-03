@@ -1,4 +1,5 @@
 import React, {
+    BackAndroid,
     Component,
     StyleSheet,
     Text,
@@ -22,7 +23,8 @@ export default class MessageView extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'stretch',
+        flex: 1,
+        backgroundColor: '#EEEEEE'
     },
     text: {
         fontSize: 20,
