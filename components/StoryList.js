@@ -28,8 +28,7 @@ export default class StoryList extends Component {
             <ListView
                 dataSource={this.state.dataSource}
                 renderRow={(item) => this.renderItem(navigator, item)}
-                style={styles.listView}
-                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />} />
+                style={styles.listView} />
         );
     }
 

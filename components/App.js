@@ -14,8 +14,7 @@ import {
     Router,
     Scene
 } from 'react-native-router-flux';
-const RouterWithRedux = connect()(Router);
-import MessageView from './MessageView';
+import StoryScreen from './StoryScreen';
 import StoryListWithLoadingView from './StoryListWithLoadingView';
 
 export default class App extends Component {
@@ -43,8 +42,8 @@ export default class App extends Component {
     }
 
     renderScene(route, navigator) {
-        if (route.message) {
-            return <MessageView message={route.message} />
+        if (route.story) {
+            return <StoryScreen story={route.story} />
         }
 
         return <StoryListWithLoadingView navigator={navigator} />

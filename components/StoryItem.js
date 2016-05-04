@@ -10,10 +10,15 @@ import PreviewImage from './PreviewImage';
 
 export default class StoryItem extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onClick = this.onClick.bind(this);
+    }
+
     render() {
-        const { navigator, story}  = this.props;
+        const { story}  = this.props;
         return (
-            <TouchableHighlight key={story.name} style={styles.highlight} underlayColor='white' onPress = {() => this.onClick(navigator, story)}>
+            <TouchableHighlight key={story.name} style={styles.highlight} underlayColor='white' onPress={this.onClick}>
                 <View style={styles.storyContainer}>
                     <View style={styles.contentContainer}>
                         <View style={styles.topContainer}>
@@ -37,8 +42,9 @@ export default class StoryItem extends Component {
         )
     }
 
-    onClick(navigator, story) {
-        navigator.push({ message: story.title });
+    onClick() {
+        const { navigator, story } = this.props;
+        navigator.push({ story: story });
     }
 }
 
