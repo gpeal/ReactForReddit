@@ -50,9 +50,6 @@ export default class App extends Component {
     }
 
     handleBackButton() {
-        console.log('this ' + this);
-        console.log('this.refs ' + this.refs);
-        console.log('this.refs.navigator ' + this.refs.navigator);
         const navigator = this.refs.navigator;
         if (navigator && navigator.getCurrentRoutes().length > 1) {
             navigator.pop();
